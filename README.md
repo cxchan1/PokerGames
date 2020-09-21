@@ -1,7 +1,9 @@
 # PokerGames
  A simple program that can take two 5-card poker hands, classify each hand, and determine which hand would win
 
-<img alt="NetBook" src="./demo.png">
+<img alt="Run" src="./assets/demo1.png">
+<img alt="Unit Test" src="./assets/demo2.png">
+
 
 ## Technologies
 - [React](https://github.com/facebook/create-react-app#readme)
