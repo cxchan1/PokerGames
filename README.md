@@ -4,7 +4,6 @@
 <img alt="Run" src="./assets/demo2.png">
 <img alt="Unit Test" src="./assets/demo1.png">
 
-
 ## Technologies
 - [Python](https://www.python.org/downloads/release/python-380/)
 - [API](http://deckofcardsapi.com/)
@@ -13,20 +12,13 @@
 ## Getting Started
 Clone this repository
 ```
-$ git clone git@github.com:cxchan1/netbook.git
+$ git clone git@github.com:cxchan1/PokerGames.git
 ```
-Install node modules, [Yarn](https://yarnpkg.com/en/) is highly recommended.
+Run the progam:
 ```
-$ cd netbook/netbook-client/ && yarn install
+$ cd PokerGames && python src/main.py
 ```
-Run netbook front end:
+Run unittests:
 ```
-$ yarn start
+$ cd PokerGames/src && python -m unittest
 ```
-Run netbook server side, [Golang](https://golang.org/doc/install):
-```
-$ cd netbook/netbook-server/ && go run main.go
-```
-## Hints:
-- Make sure you start the front end first before you run the server side. Otherwise, front-end and back-end won't talk to each other because of Node.js (localhost only)
-- (WARNING) Currently, there is no database on the server side yet so right now there is no way to save your data on the application.
