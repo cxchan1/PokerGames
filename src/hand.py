@@ -17,12 +17,19 @@ class Hand:
     def __init__(self, cardlist):
         self.cards=[]
         for card_data in cardlist:
-            self.cards.append(Card(card_data))
+            if card_data == '*':
+                new_hand = self.handle_wild_card(cardlist)
+                self.cards = new_hand if len(new_hand) != 0 else []
+                break
+            else:
+                self.cards.append(Card(card_data))
         self.valueCounter = Counter(card.number for card in self.cards)
+
     def toConsole(self):
 
         string = ''.join((c.value) for c in self.cards)
         return string
+
     # classify hand. only designed for 5 card hands.
     def classify(self):
         if len(self.cards) != 5:
@@ -41,7 +48,7 @@ class Hand:
         elif maxValueCount == 3:
             return HandTypes.Three_Of_A_Kind
         elif maxValueCount == 2:
-            if len(self.valueCounter)==3:
+            if len(self.valueCounter) == 3:
                 return HandTypes.Two_Pair
             else:
                 return HandTypes.Pair
@@ -71,3 +78,20 @@ class Hand:
             list.append(c.number)
         list.sort()
         return list
+
+    # return a new hand with the best value from the wild card
+    def handle_wild_card(self, cardlist):
+        result = []
+        highest_rank = 1
+        for r in "23456789TJQKA":
+            self.cards=[]
+            for card_data in cardlist:
+                if card_data == '*':
+                    self.cards.append(Card(r))
+                else:
+                    self.cards.append(Card(card_data))
+            self.valueCounter = Counter(card.number for card in self.cards)
+            if highest_rank < self.getvalue():
+                highest_rank = self.getvalue()
+                result = self.cards
+        return result
