@@ -3,7 +3,7 @@
 # Parse the cards draw from the deck into readable object
 class Card:
     numberLookup = {"0": 10, 10: 10, "10": 10, "T": 10, "JACK": 11, "J": 11, "QUEEN": 12, "Q": 12, "KING": 13, "K": 13, "ACE": 14, "A": 14,
-                    "JOKER": 14, "*": 14}
+                    "JOKER": 15, "*": 15}
 
     def __init__(self, carddata):
         if isinstance(carddata, str):

@@ -11,7 +11,8 @@ class Result:
     # return 1(win), 0(lose), -1(tie)
     def compare(self):
         if self.left is None or self.right is None:
-            return "Error: one of the card is empty"
+            raise Exception("Error: one of the card is empty")
+            return
 
         left_value = self.left.getvalue()
         right_value = self.right.getvalue()
@@ -23,6 +24,8 @@ class Result:
         else:
             if left_value == 3:
                 return self.compare_two_pair()
+            if left_value == 2 or left_value == 4:
+                return self.compare_pair()
             return self.compare_cards()
 
     def compare_cards(self):
@@ -39,6 +42,22 @@ class Result:
         if result_left > result_right:
             return 1
         elif result_left < result_right:
+            return 0
+        else:
+            return -1
+
+    def compare_pair(self):
+        right = self.right.getlist()
+        left = self.left.getlist()
+
+        seen_right = set(set([x for x in right if right.count(x) > 1]))
+        seen_left = set(set([x for x in left if left.count(x) > 1]))
+
+        x = seen_left.pop()
+        y = seen_right.pop()
+        if x > y:
+            return 1
+        elif x < y:
             return 0
         else:
             return -1
