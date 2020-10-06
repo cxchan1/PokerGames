@@ -10,8 +10,6 @@ class TestPokerGames(unittest.TestCase):
     two_pair_hand = Hand(['2','2','K','K','3'])
     pair_hand = Hand(['A','A','2','3','7'])
     high_card_hand = Hand(['J','2','4','5','8'])
-    empty_hand = Hand([])
-    short_hand = Hand(['2','6','7','8'])
 
     def test_fourkind(self):
         self.assertEqual(self.four_kind_hand.classify(), HandTypes.Four_Of_A_Kind)
@@ -28,9 +26,9 @@ class TestPokerGames(unittest.TestCase):
     def test_highcard(self):
         self.assertEqual(self.high_card_hand.classify(), HandTypes.High_Card)
     def test_emptyhand(self):
-        self.assertEqual(self.empty_hand.classify(), None)
+        with self.assertRaises(ValueError) : Hand([])
     def test_shortcard(self):
-        self.assertEqual(self.short_hand.classify(), None)
+        with self.assertRaises(ValueError) : Hand(['2', '6', '7', '8'])
     def test_result_case_one(self):
         player_one = Hand(['A', 'A', 'A', 'K', 'T'])
         player_two = Hand(['2', '2', '2', '3', '3'])
@@ -93,18 +91,23 @@ class TestPokerGames(unittest.TestCase):
         self.assertEqual(result.compare(), 1)
     def test_wild_fourkind(self):
         four_kind_hand = Hand(['4', '4', '4', '*', 'A'])
+        print('\n', four_kind_hand.getlist())
         self.assertEqual(four_kind_hand.classify(), HandTypes.Four_Of_A_Kind)
     def test_wild_fullhouse(self):
         full_house_hand = Hand(['6', '6', '*', '7', '7'])
+        print(full_house_hand.getlist())
         self.assertEqual(full_house_hand.classify(), HandTypes.Full_House)
     def test_wild_straight(self):
         straight_hand = Hand(['5', '6', '*', '8', '9'])
+        print(straight_hand.getlist())
         self.assertEqual(straight_hand.classify(), HandTypes.Straight)
     def test_wild_threekind(self):
         three_kind_hand = Hand(['J', 'J', '*', '2', '3'])
+        print(three_kind_hand.getlist())
         self.assertEqual(three_kind_hand.classify(), HandTypes.Three_Of_A_Kind)
     def test_wild_pair(self):
         pair_hand = Hand(['A', '*', '2', '3', '7'])
+        print(pair_hand.getlist())
         self.assertEqual(pair_hand.classify(), HandTypes.Pair)
 
 if __name__ == '__main__':

@@ -4,16 +4,16 @@ import collections
 
 class Result:
     def __init__(self, left, right):
+        if left is None or right is None:
+            raise ValueError("One of the card is empty")
+            return
+
         self.left = left
         self.right = right
 
     # compare hands. only designed for 5 card hands.
     # return 1(win), 0(lose), -1(tie)
     def compare(self):
-        if self.left is None or self.right is None:
-            raise Exception("Error: one of the card is empty")
-            return
-
         left_value = self.left.getvalue()
         right_value = self.right.getvalue()
 

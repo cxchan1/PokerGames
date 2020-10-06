@@ -15,6 +15,13 @@ class HandTypes(enum.Enum):
 
 class Hand:
     def __init__(self, cardlist):
+        if cardlist is None:
+            raise ValueError('Your card hand is empty')
+            return None
+        if len(cardlist) != 5:
+            raise ValueError('Your hand does not have exactly 5 cards!')
+            return None
+
         self.cards=[]
         for card_data in cardlist:
             if card_data == '*':
@@ -32,8 +39,6 @@ class Hand:
 
     # classify hand. only designed for 5 card hands.
     def classify(self):
-        if len(self.cards) != 5:
-            return None
         maxValueCount = max(self.valueCounter.values())
         isStraight = (maxValueCount == 1) & (max(self.valueCounter.keys())-min(self.valueCounter.keys()) == 4)
         topCard = max(self.valueCounter.keys())
@@ -91,7 +96,7 @@ class Hand:
                 else:
                     self.cards.append(Card(card_data))
             self.valueCounter = Counter(card.number for card in self.cards)
-            if highest_rank < self.getvalue():
+            if highest_rank <= self.getvalue():
                 highest_rank = self.getvalue()
                 result = self.cards
         return result
